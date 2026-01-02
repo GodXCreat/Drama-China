@@ -19,17 +19,28 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+
       <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/terbaru" element={<Latest />} />
-          <Route path="/terpopuler" element={<Trending />} />
-          <Route path="/sulih-suara" element={<DubbingIndo />} />
-          <Route path="/detail/:bookId" element={<Detail />} />
-          <Route path="/watch/:bookId" element={<Watch />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        {/* Netflix background wrapper */}
+        <div className="min-h-screen bg-[#141414] text-white">
+          
+          {/* Navbar */}
+          <Header />
+
+          {/* Page content */}
+          <main className="pt-20">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/terbaru" element={<Latest />} />
+              <Route path="/terpopuler" element={<Trending />} />
+              <Route path="/sulih-suara" element={<DubbingIndo />} />
+              <Route path="/detail/:bookId" element={<Detail />} />
+              <Route path="/watch/:bookId" element={<Watch />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
