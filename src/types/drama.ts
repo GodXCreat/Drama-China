@@ -1,3 +1,7 @@
+/* =========================
+   BASIC TYPES
+========================= */
+
 export interface TagV3 {
   tagId: number;
   tagName: string;
@@ -16,94 +20,122 @@ export interface RankVo {
   sort: number;
 }
 
+/* =========================
+   LIST / GRID DRAMA
+========================= */
+
 export interface Drama {
   bookId: string;
   bookName: string;
-  coverWap?: string;
+
   cover?: string;
+  coverWap?: string;
+
+  introduction?: string;
+  protagonist?: string;
+
   chapterCount: number;
-  introduction: string;
+
+  // ✅ numbers (dipakai UI)
+  playCount?: number;
+  viewCount?: number;
+  followCount?: number;
+
+  // tags
   tags?: string[];
   tagNames?: string[];
   tagV3s?: TagV3[];
-  protagonist?: string;
-  playCount?: string;
+
+  // badges
   corner?: Corner;
   rankVo?: RankVo;
+
   shelfTime?: string;
-  inLibrary: boolean;
+  inLibrary?: boolean;
 }
+
+/* =========================
+   SEARCH
+========================= */
 
 export interface SearchResult {
   bookId: string;
   bookName: string;
   introduction: string;
-  author: string;
+  author?: string;
   cover: string;
-  protagonist: string;
+  protagonist?: string;
   tagNames: string[];
   inLibrary: boolean;
 }
 
-// Detail Types
+/* =========================
+   DETAIL PAGE
+========================= */
+
 export interface Performer {
   performerId: string;
   performerName: string;
-  performerFormatName: string;
+  performerFormatName?: string;
   performerAvatar: string;
-  videoCount: number;
+  videoCount?: number;
 }
 
 export interface TypeTwo {
   id: number;
   name: string;
-  replaceName: string;
+  replaceName?: string;
 }
 
 export interface ChapterDetail {
   id: string;
   name: string;
   index: number;
-  indexStr: string;
+  indexStr?: string;
   unlock: boolean;
-  mp4: string;
-  m3u8Url: string;
-  m3u8Flag: boolean;
-  cover: string;
-  utime: string;
-  chapterPrice: number;
-  duration: number;
-  new: boolean;
+  mp4?: string;
+  m3u8Url?: string;
+  m3u8Flag?: boolean;
+  cover?: string;
+  utime?: string;
+  chapterPrice?: number;
+  duration?: number;
+  new?: boolean;
 }
 
 export interface BookDetail {
   bookId: string;
   bookName: string;
   cover: string;
+
   viewCount: number;
   followCount: number;
+
   introduction: string;
   chapterCount: number;
-  labels: string[];
-  tags: string[];
-  typeTwoNames: string[];
-  typeTwoList: TypeTwo[];
-  language: string;
-  typeTwoName: string;
-  shelfTime: string;
-  performerList: Performer[];
+
+  labels?: string[];
+  tags?: string[];
+
+  typeTwoNames?: string[];
+  typeTwoList?: TypeTwo[];
+
+  language?: string;
+  shelfTime?: string;
+
+  performerList?: Performer[];
 }
 
 export interface RecommendDrama {
   bookId: string;
   bookName: string;
   cover: string;
-  followCount: number;
-  introduction: string;
-  chapterCount: number;
-  labels: string[];
-  tags: string[];
-  typeTwoNames: string[];
+  followCount?: number;
+  introduction?: string;
+  chapterCount?: number;
+  labels?: string[];
+  tags?: string[];
+  typeTwoNames?: string[];
 }
 
 export interface DramaDetailResponse {
@@ -117,7 +149,10 @@ export interface DramaDetailResponse {
   success: boolean;
 }
 
-// Episode Types
+/* =========================
+   EPISODE / WATCH
+========================= */
+
 export interface VideoPath {
   quality: number;
   videoPath: string;
@@ -137,6 +172,6 @@ export interface Episode {
   isCharge: number;
   chapterName: string;
   cdnList: CdnInfo[];
-  chapterImg: string;
-  chargeChapter: boolean;
+  chapterImg?: string;
+  chargeChapter?: boolean;
 }
