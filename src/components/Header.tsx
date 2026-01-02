@@ -34,7 +34,7 @@ export function Header() {
           {/* LOGO */}
           <Link to="/" className="flex items-center gap-3">
             <span className="text-[#E50914] font-extrabold text-xl tracking-tight">
-              DRAMAFLIX
+              SANDRAMA
             </span>
           </Link>
 
