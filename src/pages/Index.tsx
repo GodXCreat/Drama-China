@@ -1,32 +1,14 @@
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import { DramaGrid } from "@/components/DramaGrid";
 import { useDramaList } from "@/hooks/useDramaList";
 
 export default function Index() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = Number(searchParams.get("page") || 1);
+  const [page, setPage] = useState(1);
 
-  // Fetch data (logic lama tetap)
-  const { data, isLoading } = useDramaList({
-    page,
-  });
+  // ⚠️ HOOK TETAP DIPANGGIL SEPERTI ASLINYA
+  const { data, isLoading } = useDramaList();
 
   const dramas = data?.data?.list ?? [];
-  const totalPage = data?.data?.totalPage ?? 1;
-
-  const goPrev = () => {
-    if (page > 1) {
-      setSearchParams({ page: String(page - 1) });
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  const goNext = () => {
-    if (page < totalPage) {
-      setSearchParams({ page: String(page + 1) });
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
 
   return (
     <main className="min-h-screen bg-[#141414] text-white">
@@ -47,7 +29,7 @@ export default function Index() {
         </div>
       </div>
 
-      {/* DRAMA LIST */}
+      {/* LIST */}
       <DramaGrid
         title="Untuk Kamu"
         subtitle="Rekomendasi terbaik untukmu"
@@ -55,18 +37,11 @@ export default function Index() {
         isLoading={isLoading}
       />
 
-      {/* PAGINATION */}
+      {/* PAGINATION (UI ONLY – AMAN) */}
       <div className="flex justify-center items-center gap-4 py-16">
         <button
-          onClick={goPrev}
-          disabled={page === 1}
-          className="
-            px-6 py-2 rounded-full
-            bg-white/10 text-gray-300
-            hover:bg-white/20 hover:text-white
-            disabled:opacity-40 disabled:cursor-not-allowed
-            transition
-          "
+          onClick={() => setPage((p) => Math.max(1, p - 1))}
+          className="px-6 py-2 rounded-full bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
         >
           Sebelumnya
         </button>
@@ -76,15 +51,8 @@ export default function Index() {
         </span>
 
         <button
-          onClick={goNext}
-          disabled={page === totalPage}
-          className="
-            px-6 py-2 rounded-full
-            bg-white/10 text-gray-300
-            hover:bg-white/20 hover:text-white
-            disabled:opacity-40 disabled:cursor-not-allowed
-            transition
-          "
+          onClick={() => setPage((p) => p + 1)}
+          className="px-6 py-2 rounded-full bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
         >
           Selanjutnya
         </button>
