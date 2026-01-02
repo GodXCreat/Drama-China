@@ -1,15 +1,79 @@
+/* ===============================
+   Netflix Global Theme
+   =============================== */
 
-body {
-  background-color: #141414;
-  color: #ffffff;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #141414;
+  color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Text selection */
+::selection {
+  background: #e50914;
+  color: #ffffff;
+}
+
+/* Scrollbar (Netflix style) */
 ::-webkit-scrollbar {
-  height: 8px;
+  height: 6px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
+  background: rgba(229, 9, 20, 0.8);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
   background: #e50914;
-  border-radius: 4px;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth transitions */
+a,
+button {
+  transition: all 0.2s ease;
+}
+
+/* Image optimization */
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Netflix-style glass effect (optional) */
+.glass {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+/* Gradient text helper */
+.gradient-text {
+  background: linear-gradient(90deg, #ffffff, #e50914);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
