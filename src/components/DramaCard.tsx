@@ -14,80 +14,64 @@ export function DramaCard({ drama, index = 0 }: DramaCardProps) {
   return (
     <Link
       to={`/detail/${drama.bookId}`}
-      className="group relative rounded-2xl overflow-hidden card-hover animate-fade-up block"
+      className="
+        group relative
+        min-w-[180px]
+        cursor-pointer
+        transition-transform duration-300
+        hover:scale-125
+        hover:z-20
+      "
       style={{ animationDelay: `${index * 50}ms` }}
     >
-      {/* Cover Image */}
-      <div className="aspect-[2/3] relative overflow-hidden">
+      {/* Poster */}
+      <div className="relative aspect-[2/3] overflow-hidden rounded-md bg-black">
         <img
           src={coverUrl}
           alt={drama.bookName}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80" />
-        
-        {/* Corner Badge */}
+
+        {/* Netflix overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        {/* Center Play */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-xl">
+            <Play className="w-7 h-7 text-black ml-1" />
+          </div>
+        </div>
+
+        {/* Top badges (tetap aman) */}
         {drama.corner && (
           <div
-            className="absolute top-3 left-3 badge-popular"
+            className="absolute top-2 left-2 text-xs px-2 py-1 rounded bg-red-600 font-bold"
             style={{ backgroundColor: drama.corner.color }}
           >
             {drama.corner.name}
           </div>
         )}
 
-        {/* Rank Badge */}
         {drama.rankVo && (
-          <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 rounded-md bg-background/80 backdrop-blur-sm">
-            <Flame className="w-3.5 h-3.5 text-secondary" />
-            <span className="text-xs font-bold">{drama.rankVo.hotCode}</span>
+          <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded bg-black/70 text-xs">
+            <Flame className="w-3 h-3 text-red-500" />
+            {drama.rankVo.hotCode}
           </div>
         )}
-
-        {/* Episode Count */}
-        <div className="absolute bottom-3 left-3 episode-count">
-          <Play className="w-3 h-3 text-primary" />
-          <span>{drama.chapterCount} Episode</span>
-        </div>
-
-        {/* Play Count */}
-        {drama.playCount && (
-          <div className="absolute bottom-3 right-3 play-count">
-            <span>{drama.playCount} views</span>
-          </div>
-        )}
-
-        {/* Hover Play Button */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button className="w-14 h-14 rounded-full bg-primary/90 backdrop-blur-sm flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform duration-300 shadow-lg shadow-black/60-lg">
-            <Play className="w-6 h-6 text-white fill-white ml-1" />
-          </button>
-        </div>
       </div>
 
-      {/* Content */}
-      <div className="p-4 space-y-2">
-        <h3 className="font-display font-semibold text-foreground line-clamp-2 leading-tight group-hover:text-primary transition-colors">
+      {/* Title muncul saat hover */}
+      <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <h3 className="text-sm font-semibold line-clamp-2">
           {drama.bookName}
         </h3>
 
         {drama.protagonist && (
-          <p className="text-xs text-muted-foreground truncate">
+          <p className="text-xs text-gray-400 truncate">
             {drama.protagonist}
           </p>
         )}
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 pt-1">
-          {tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="tag-pill">
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
     </Link>
   );
