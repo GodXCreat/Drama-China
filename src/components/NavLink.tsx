@@ -4,23 +4,45 @@ import { cn } from "@/lib/utils";
 
 interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
   className?: string;
-  activeClassName?: string;
-  pendingClassName?: string;
 }
 
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
-  ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
+  ({ className, to, ...props }, ref) => {
     return (
       <RouterNavLink
         ref={ref}
         to={to}
-        className={({ isActive, isPending }) =>
-          cn(className, isActive && activeClassName, isPending && pendingClassName)
+        className={({ isActive }) =>
+          cn(
+            // base style (Netflix)
+            "relative text-sm transition-colors",
+            isActive
+              ? "text-white font-semibold"
+              : "text-gray-300 hover:text-white",
+            className
+          )
         }
         {...props}
-      />
+      >
+        {({ isActive }) => (
+          <>
+            {props.children}
+
+            {/* Netflix underline */}
+            {isActive && (
+              <span
+                className="
+                  absolute -bottom-2 left-0 right-0
+                  h-[2px] bg-[#E50914]
+                  rounded-full
+                "
+              />
+            )}
+          </>
+        )}
+      </RouterNavLink>
     );
-  },
+  }
 );
 
 NavLink.displayName = "NavLink";
